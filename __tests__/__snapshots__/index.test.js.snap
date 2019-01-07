@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Snapshot Testing Home shows 3 cards 1`] = `
+<div
+  className="jsx-243749409"
+>
+  <nav
+    className="jsx-2055897931"
+  >
+    <ul
+      className="jsx-2055897931"
+    >
+      <li
+        className="jsx-2055897931"
+      >
+        <a
+          className="jsx-2055897931"
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </li>
+      <ul
+        className="jsx-2055897931"
+      >
+        <li
+          className="jsx-2055897931"
+        >
+          <a
+            className="jsx-2055897931"
+            href="/explorer"
+            onClick={[Function]}
+          >
+            Explorer
+          </a>
+        </li>
+        <li
+          className="jsx-2055897931"
+        >
+          <a
+            className="jsx-2055897931"
+            href="/market"
+            onClick={[Function]}
+          >
+            Market
+          </a>
+        </li>
+      </ul>
+    </ul>
+  </nav>
+  <div
+    className="jsx-243749409 hero"
+  >
+    <h1
+      className="jsx-243749409 title"
+    >
+      Welcome to Block Explorer
+    </h1>
+    <p
+      className="jsx-243749409 description"
+    >
+      Building the next great crypto news and tools website.
+    </p>
+    <div
+      className="jsx-243749409 row"
+    >
+      <a
+        className="jsx-243749409 card"
+        href="/explorer"
+        onClick={[Function]}
+      >
+        <h3
+          className="jsx-243749409"
+        >
+          Explorer
+        </h3>
+        <p
+          className="jsx-243749409"
+        >
+          Bitcoin transactions, addresses and blocks oh my. Backend - bcoin
+        </p>
+      </a>
+      <a
+        className="jsx-243749409 card"
+        href="/market"
+        onClick={[Function]}
+      >
+        <h3
+          className="jsx-243749409"
+        >
+          Market
+        </h3>
+        <p
+          className="jsx-243749409"
+        >
+          XRP, ETH, BTC prices prices prices. Backend - CoinMarketCap and more
+        </p>
+      </a>
+      <a
+        className="jsx-243749409 card"
+        href="/news"
+        onClick={[Function]}
+      >
+        <h3
+          className="jsx-243749409"
+        >
+          News
+        </h3>
+        <p
+          className="jsx-243749409"
+        >
+          Headlines, articles, news. Backend - Wordpress 
+        </p>
+      </a>
+    </div>
+  </div>
+</div>
+`;

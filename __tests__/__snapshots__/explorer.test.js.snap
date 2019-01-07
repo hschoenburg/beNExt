@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index snapshot Explorer shows 3 rows 1`] = `
+<div
+  className="jsx-3933479298"
+>
+  <nav
+    className="jsx-2055897931"
+  >
+    <ul
+      className="jsx-2055897931"
+    >
+      <li
+        className="jsx-2055897931"
+      >
+        <a
+          className="jsx-2055897931"
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </li>
+      <ul
+        className="jsx-2055897931"
+      >
+        <li
+          className="jsx-2055897931"
+        >
+          <a
+            className="jsx-2055897931"
+            href="/explorer"
+            onClick={[Function]}
+          >
+            Explorer
+          </a>
+        </li>
+        <li
+          className="jsx-2055897931"
+        >
+          <a
+            className="jsx-2055897931"
+            href="/market"
+            onClick={[Function]}
+          >
+            Market
+          </a>
+        </li>
+      </ul>
+    </ul>
+  </nav>
+  <div
+    className="jsx-3933479298 hero"
+  >
+    <h1
+      className="jsx-3933479298 title"
+    >
+      Bcoin Explorer
+    </h1>
+    <p
+      className="jsx-3933479298 description"
+    >
+      Make Crypto Useful
+    </p>
+  </div>
+  <div
+    className="jsx-3933479298 row"
+  >
+    <div
+      className="jsx-266566849 explorer-search"
+    >
+      <form
+        className="jsx-266566849"
+        onSubmit={[Function]}
+      >
+        <input
+          className="jsx-266566849"
+          id="ExplorerSearch"
+          onChange={[Function]}
+          type="text"
+        />
+        <input
+          className="jsx-266566849"
+          type="submit"
+          value="Search"
+        />
+      </form>
+    </div>
+  </div>
+  <div
+    className="jsx-3933479298 row"
+  >
+    <h3>
+      Default Focus State
+    </h3>
+  </div>
+  <div
+    className="jsx-3933479298 row"
+  />
+</div>
+`;

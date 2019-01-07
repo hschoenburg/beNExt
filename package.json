@@ -1,0 +1,33 @@
+{
+  "name": "BlockExplorer",
+  "scripts": {
+    "dev": "NODE_ENV=development node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "test": "NODE_ENV=test jest || exit 0",
+    "testsnap": "NODE_ENV=test jest --updateSnapshot || exit 0",
+    "coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "bclient": "^0.1.5",
+    "dotenv-webpack": "^1.6.0",
+    "express": "^4.16.4",
+    "express-async-handler": "^1.1.4",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^7.0.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest": "^23.6.0"
+  },
+  "standard": {
+    "globals": [
+      "expect",
+      "describe"
+    ]
+  }
+}
