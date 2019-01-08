@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from '../../components/head'
 import Nav from '../../components/nav'
-import Block from '../../components/block'
+//import Block from '../../components/block'
 
 // Iniital props
 // then getblockbyheight for most recent blocks

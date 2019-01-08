@@ -3,8 +3,8 @@ import Head from '../../components/head'
 import Link from 'next/link'
 import Search from '../../components/search'
 import ErrorMsg from '../../components/utils/error_msg'
-import Block from '../../components/block'
-import Address from '../../components/address'
+//import Block from '../../components/block'
+//import Address from '../../components/address'
 
 
 // Container Component with Search bar and History functionality
@@ -171,7 +171,7 @@ const History = (props) => {
 }
 
 Explorer.getInitialProps = (data) => {
-  console.log(data)
+  //console.log(data)
   return {type: data.query.type || null, term: data.query.term || null}
 }
 

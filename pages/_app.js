@@ -1,15 +1,14 @@
 import React from 'react'
 import App, { Container } from 'next/app'
-import fetch from 'isomorphic-unfetch'
+//import fetch from 'isomorphic-unfetch'
 
 import Sidebar from '../components/sidebar'
 import Nav from '../components/nav'
 
 export default class RShake extends App {
   static async getInitialProps ({ Component, router, ctx }) {
-
-    let query = await fetch(process.env.SERVER_URL + '/api/btc/latest')
-    let latest = await query.json()
+    let query = await fetch(process.env.SERVER_URL + '/api/btc/head')
+    let latest = query.json()
 
     let pageProps
     let sideBarProps = {latest: latest}
