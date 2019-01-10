@@ -4,7 +4,7 @@ const Sidebar = (props) => (
     <p>Latest Blocks</p>
     <ul>
       {props.latest.map(b => 
-        <li key={b.height}>Height: {b.height} </li>
+        <li key={b.height}> {b.height} : {b.hash} </li>
       )}
 
     </ul>

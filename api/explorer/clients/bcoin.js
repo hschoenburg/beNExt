@@ -1,11 +1,10 @@
 const {NodeClient} = require('bclient')
+const logger = require('../../logger')
 
 // TODO connection not configured properly
 
 class bcoinClient {
   constructor (params) {
-
-
     let host, network, apiKey
     switch (params.coin) {
       case 'hsd':
@@ -22,21 +21,25 @@ class bcoinClient {
     this.client = new NodeClient({host: host, network: network, apiKey: apiKey})
   }
 
-  async getBlock (req, res, next) {
+  async getBlock (hash) {
     try {
-      let data = await this.client.execute('getblock', [req.params.hash, true])
-      res.json(data)
+      let data = await this.client.execute('getblock', [hash, true])
+      return data
     } catch (err) {
-      res.error(err)
     }
   }
 
-  async getHead (req, res, next) {
+  async getLatest () {
+    return []
+  }
+
+  async getHead () {
     try {
       let head = await this.client.execute('getchaintips')
-      res.json(head)
+      return head
     } catch (err) {
-      res.error(err)
+      logger.error(err)
+      throw err
     }
   }
 }

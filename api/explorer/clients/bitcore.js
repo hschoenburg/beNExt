@@ -1,6 +1,7 @@
 const assert = require('assert')
 const fetch = require('node-fetch')
 const logger = require('../../logger')
+require('dotenv').config()
 
 /*
  * bitcore API endpoints quickref
@@ -32,12 +33,32 @@ class BitcoreClient {
 
   async getHead () {
     try {
-      console.log(this.url)
-      //let r = await fetch(this.url + '/status?q=getinfo')
-      //console.log(r)
-      //let data = await r.json()
-      return [{height: 33333}]
+      let r = await fetch(this.url + '/status?q=getinfo')
+      let data = await r.json()
+      return data.info.blocks
     } catch (err) {
+      logger.error(err)
+      throw err
+    }
+  }
+
+  async getLatest () {
+    try {
+      let getinfo = await fetch(this.url + '/status?q=getinfo')
+      let json = await getinfo.json()
+      var height = json.info.blocks
+
+      let latest = []
+      for (var i = 0; i < 4; i++) {
+        let next = height - i
+        let blockIndex = await fetch(this.url + '/block-index/' + next)
+        let json = await blockIndex.json()
+        latest.push({height: next, hash: json.blockHash})
+      }
+
+      return latest
+    } catch (err) {
+      logger.error(err)
       throw err
     }
   }
@@ -50,7 +71,7 @@ class BitcoreClient {
       let data = await r.json()
 
       if (data.err) { throw new Error(data.err) }
-      //console.log(data)
+      // console.log(data)
       return data.result
     } catch (err) {
       throw err
