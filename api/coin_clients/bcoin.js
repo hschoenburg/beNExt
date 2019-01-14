@@ -21,26 +21,43 @@ class bcoinClient {
     this.client = new NodeClient({host: host, network: network, apiKey: apiKey})
   }
 
-  async getBlock (hash) {
+  async getHeight () {
+    return 'bcoin height'
+  /*
     try {
-      let data = await this.client.execute('getblock', [hash, true])
-      return data
+      let data = await this.client.execute('getblockchaininfo')
+      return data.blocks
     } catch (err) {
-    }
-  }
-
-  async getLatest () {
-    return []
-  }
-
-  async getHead () {
-    try {
-      let head = await this.client.execute('getchaintips')
-      return head
-    } catch (err) {
-      logger.error(err)
       throw err
     }
+    */
+  }
+
+  async getBlock (hash) {
+    /*
+      try {
+        let data = await this.client.execute('getblock', [hash, true])
+        return data
+      } catch (err) {
+      }
+      */
+    return 'bcoin Block'
+  }
+
+  async getTx () {
+    return 'bcoin Tx'
+  }
+
+  async getAddress () {
+    return 'bcoin Address'
+  }
+
+  async getBlocks () {
+    return 'bcoin Blocks list'
+  }
+
+  async getTxs () {
+    return 'bcoin Transactions list'
   }
 }
 

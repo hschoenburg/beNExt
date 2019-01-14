@@ -3,13 +3,11 @@ const next = require('next')
 const asyncHandler = require('express-async-handler')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev, quiet: false })
-const logger = require('./api/logger')
+const logger = require('./logger')
 const helmet = require('helmet')
 
 const handler = app.getRequestHandler()
-const Explorer = require('./api/explorer/')
-
-const SUPPORTED_COINS = ['btc', 'zec', 'hsd']
+const CoinApi = require('./api/coin_api')
 
 app.prepare()
 .then(() => {
@@ -40,22 +38,46 @@ app.prepare()
     ignoreRoute: function (req, res) { return false }
   }))
 
-  // custom route to pass URL params for pages/explorer
-  server.get('/explorer/block/:hash', (req, res) => {
-    const actualPage = '/explorer/block'
-    const queryParams = { type: 'block', term: req.params.hash || null }
-    app.render(req, res, actualPage, queryParams)
-  })
+  const SUPPORTED_PARAMS = ['block', 'address', 'tx']
+  const SUPPORTED_COINS = process.env.SUPPORTED_COINS.split(',')
 
-  // shared api routes used by react client and next SSR
-  // routes unique to a single coin need be specified individually
+  SUPPORTED_COINS.forEach(coin => {
+    logger.info('SUPPORTING COIN: ' + coin)
 
-  SUPPORTED_COINS.forEach(function (coin) {
-    let base = '/api/' + coin
-    let api = new Explorer({coin: coin})
-    logger.info('SUPPORTING COIN: ' + base)
-    server.get(base + '/block/:hash', asyncHandler(api.getBlock()))
-    server.get(base + '/latest', asyncHandler(api.getLatest()))
+    let apiBase = '/api/' + coin
+    let apiRoutes = new CoinApi({coin: coin})
+
+    // Endpoints for /api/*
+    // These are direct proxies for calls to coin_clients
+    // Can be used directly. Called by pages in GetInititalProps
+    // /api/coin/param/:param
+    server.get(apiBase + '/height', asyncHandler(apiRoutes.getHeight()))
+    server.get(apiBase + '/block/:block', asyncHandler(apiRoutes.getBlock()))
+    server.get(apiBase + '/blocks', asyncHandler(apiRoutes.getBlocks()))
+    server.get(apiBase + '/address/:address', asyncHandler(apiRoutes.getAddress()))
+    server.get(apiBase + '/tx/:tx', asyncHandler(apiRoutes.getTx()))
+    server.get(apiBase + '/txs', asyncHandler(apiRoutes.getTxs()))
+
+    // Explorer routes for each coin
+    let explorerFile = '/explorer'
+    let explorerUrl = '/ex'
+
+    // Index routes
+    let getUrl = explorerUrl + '/' + coin
+    server.get(getUrl, (req, res) => {
+      req.params.coin = coin
+      app.render(req, res, explorerFile)
+    })
+
+    // Overview routes (address, block, tx)
+    SUPPORTED_PARAMS.forEach(param => {
+      let pagePath = explorerFile + '/' + param
+      let getUrl = explorerUrl + '/' + coin + '/' + param + '/:' + param
+      server.get(getUrl, (req, res) => {
+        req.params.coin = coin
+        app.render(req, res, pagePath)
+      })
+    })
   })
 
   server.use(handler)

@@ -1,12 +1,13 @@
 import React from 'react'
 import Head from '../../components/head'
+import Nav from '../../components/nav'
 import fetch from 'isomorphic-unfetch'
 
-const BlockPage = (props) => (
+const TxPage = (props) => (
   <div>
     <Head title='Block' />
     <div className='hero'>
-      <h1 className='title'>Block: {props.block}</h1>
+      <h1 className='title'>Tx: {props.tx}</h1>
       <h3>Coin: {props.coin} </h3>
     </div>
 
@@ -26,12 +27,12 @@ const BlockPage = (props) => (
   </div>
 )
 
-BlockPage.getInitialProps = async ({ req }) => {
-  let block = req.params.block || req.query.block || null
+TxPage.getInitialProps = async ({ req }) => {
+  let tx = req.params.tx || req.query.tx || null
   let coin = req.path.split('/')[2]
-  let request = await fetch(process.env.SERVER_URL + '/api/' + coin + '/block/' + block)
+  let request = await fetch(process.env.SERVER_URL + '/api/' + coin + '/tx/' + tx)
   let data = await request.json()
-  return { block: data, coin: coin }
+  return { tx: data, coin: coin }
 }
 
-export default BlockPage
+export default TxPage

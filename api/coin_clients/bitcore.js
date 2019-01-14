@@ -31,7 +31,39 @@ class BitcoreClient {
     }
   }
 
-  async getHead () {
+  async getBlock ({ hash }) {
+    return 'bitcore block'
+      /*
+      assert(hash, 'Block Hash Required')
+      assert((hash.length === 64), 'Valid Block Hash Required')
+      let r = await fetch(this.url + '/block/' + hash)
+      let data = await r.json()
+      if (data.err) { throw new Error(data.err) }
+      return data.result
+    } catch (err) {
+      throw err
+    }
+    */
+  }
+
+  async getAddress ({ address }) {
+    return 'bitcore addresses'
+  }
+
+  async getTx () {
+    return 'bitcore transactions'
+  }
+
+  async getBlocks () {
+    return 'bitcore blocks'
+  }
+
+  async getTxs () {
+    return 'bitcore txs'
+  }
+
+  async getHeight () {
+    debugger
     try {
       let r = await fetch(this.url + '/status?q=getinfo')
       let data = await r.json()
@@ -44,9 +76,7 @@ class BitcoreClient {
 
   async getLatest () {
     try {
-      let getinfo = await fetch(this.url + '/status?q=getinfo')
-      let json = await getinfo.json()
-      var height = json.info.blocks
+      var height = await this.getHeight()
 
       let latest = []
       for (var i = 0; i < 4; i++) {
@@ -59,21 +89,6 @@ class BitcoreClient {
       return latest
     } catch (err) {
       logger.error(err)
-      throw err
-    }
-  }
-
-  async getBlock (hash) {
-    try {
-      assert(hash, 'Block Hash Required')
-      assert((hash.length === 64), 'Valid Block Hash Required')
-      let r = await fetch(this.url + '/block/' + hash)
-      let data = await r.json()
-
-      if (data.err) { throw new Error(data.err) }
-      // console.log(data)
-      return data.result
-    } catch (err) {
       throw err
     }
   }
