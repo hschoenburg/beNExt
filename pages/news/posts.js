@@ -4,12 +4,11 @@ import Head from '../../components/head'
 // import Link from 'next/link'
 import fetch from 'isomorphic-unfetch'
 
-const AddressPage = (props) => (
+const PostsPage = (props) => (
   <div>
-    <Head title='Address' />
+    <Head title='Posts' />
     <div className='hero'>
-      <h1 className='title'>Address: {props.address}</h1>
-      <h3>Coin: {props.coin} </h3>
+      <h1 className='title'>Posts: {props.category}</h1>
     </div>
 
     <style jsx>{`
@@ -28,11 +27,10 @@ const AddressPage = (props) => (
   </div>
 )
 
-AddressPage.getInitialProps = async ({ req }) => {
-  let coin = req.path.split('/')[1]
-  let request = await fetch(process.env.SERVER_URL + '/api/ex/' + coin + '/address/' + req.params.eddress)
+PostsPage.getInitialProps = async ({ req }) => {
+  let request = await fetch(process.env.SERVER_URL + '/api/news/posts/' + req.params.category)
   let data = await request.json()
-  return { address: req.params.address, coin: coin }
+  return data
 }
 
-export default AddressPage
+export default PostsPage
