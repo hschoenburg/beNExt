@@ -1,10 +1,10 @@
 
 // all are supersets of a common interface defined here
-const BitcoreClient = require('./coin_clients/bitcore')
-const BcoinClient = require('./coin_clients/bcoin')
+const BitcoreClient = require('./coins/bitcore')
+const BcoinClient = require('./coins/bcoin')
 const logger = require('../logger')
 
-class CoinApi {
+class CoinClient {
   constructor (params) {
     this.coin = params.coin
 
@@ -109,4 +109,4 @@ class CoinApi {
   }
 }
 
-module.exports = CoinApi
+module.exports = CoinClient

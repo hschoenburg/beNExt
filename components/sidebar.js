@@ -1,6 +1,6 @@
-const Sidebar = (props) => (
+const SideBar = (props) => (
   <div>
-    <h2>Sidebar</h2>
+    <h2>SideBar</h2>
     <p>Latest Blocks</p>
     <ul>
       {props.latest.map(b => 
@@ -11,4 +11,4 @@ const Sidebar = (props) => (
   </div>
 )
 
-export default Sidebar
+export default SideBar

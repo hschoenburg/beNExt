@@ -1,6 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
-const CoinApi = require('../api/coin_api')
+const CoinClient = require('../clients/coin_client')
 
 const SUPPORTED_PARAMS = ['block', 'address', 'tx']
 const SUPPORTED_COINS = process.env.SUPPORTED_COINS.split(',')
@@ -16,7 +16,7 @@ module.exports = {
       // Can be used directly. Called by pages in GetInititalProps
       // /api/coin/param/:param
 
-      let apiRoutes = new CoinApi({coin: coin})
+      let apiRoutes = new CoinClient({coin: coin})
       let apiBase = '/' + coin
       apiRouter.get(apiBase + '/height', asyncHandler(apiRoutes.getHeight()))
       apiRouter.get(apiBase + '/block/:block', asyncHandler(apiRoutes.getBlock()))

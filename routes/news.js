@@ -1,4 +1,8 @@
 const express = require('express')
+//const wpClient = require('../clients/wp_client')
+// const asyncHandler = require('express-async-handler')
+
+//const wp = new wpClient()
 
 module.exports = {
 
@@ -10,7 +14,9 @@ module.exports = {
     })
 
     apiRouter.get('/post/:title', (req, res, next) => {
-      res.json({title: req.params.title})
+      res.json({category: req.params.category, posts: []})
+      // let post = wp.getPost(req.params.title)
+      // res.json(post)
     })
 
     apiRouter.get('/author/:author', (req, res, next) => {
