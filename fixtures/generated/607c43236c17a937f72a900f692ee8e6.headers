@@ -1,0 +1,21 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "x-long-polling": "/?longpoll=1",
+    "content-type": "application/json",
+    "content-length": "636",
+    "date": "Fri, 18 Jan 2019 00:11:55 GMT",
+    "connection": "keep-alive"
+  },
+  "url": "http://192.241.237.167:14037//",
+  "time": 51,
+  "request": {
+    "method": "POST",
+    "headers": {
+      "User-Agent": "brq",
+      "Content-Type": "application/json; charset=utf-8",
+      "Content-Length": "51",
+      "Authorization": "Basic OmhleXRoZXJl"
+    }
+  }
+}
