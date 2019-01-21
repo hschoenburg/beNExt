@@ -18,12 +18,11 @@ const SearchBar = (props) => {
   )
 }
 
-const SearchBarSelect = ({ coins, coin }) => {
+const SearchBarSelect = ({ COINS, coin }) => {
   return (
     <div>
-      <h3>SearchBarSelect</h3>
       <select id='coin-select'>
-        {coins.map(c => {
+        {COINS.map(c => {
           //let selected = c === coin ? 'selected' : ''
           return (<option key={c} value={c} defaultValue={coin}>{c}</option>)
         })}

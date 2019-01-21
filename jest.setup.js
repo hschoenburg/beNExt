@@ -6,6 +6,8 @@ import Router from 'next/router'
 const mockedRouter = { push: () => {}, prefetch: () => {} }
 Router.router = mockedRouter
 
+jest.setTimeout(5000); // needed when not using sepia cache
+
 process.env.VCR_MODE='record'
 
 configure({ adapter: new Adapter() })

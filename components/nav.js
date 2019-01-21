@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import SearchBar from './searchbar'
 
 const links = [
   { href: '/explorer', label: 'Explorer' },
@@ -10,13 +11,16 @@ const links = [
   return link
 })
 
-const Nav = () => (
+const Nav = (props) => (
   <nav>
     <ul>
       <li>
         <Link prefetch href='/'>
           <a>Home</a>
         </Link>
+      </li>
+      <li>
+        <SearchBar {...props} />
       </li>
       <ul>
         {links.map(({ key, href, label }) => (

@@ -1,4 +1,3 @@
-const assert = require('assert')
 const fetch = require('node-fetch')
 const logger = require('../../logger')
 require('dotenv').config()
@@ -31,19 +30,15 @@ class BitcoreClient {
     }
   }
 
-  async getBlock ({ hash }) {
-    return 'bitcore block'
-      /*
-      assert(hash, 'Block Hash Required')
-      assert((hash.length === 64), 'Valid Block Hash Required')
-      let r = await fetch(this.url + '/block/' + hash)
+  async getHeight () {
+    try {
+      let r = await fetch(this.url + '/status?q=getinfo')
       let data = await r.json()
-      if (data.err) { throw new Error(data.err) }
-      return data.result
+      return data.info.blocks
     } catch (err) {
+      logger.error(err)
       throw err
     }
-    */
   }
 
   async getAddress ({ address }) {
@@ -55,42 +50,42 @@ class BitcoreClient {
   }
 
   async getBlocks () {
-    return 'bitcore blocks'
+    let blocks = []
+    let best = await this.getBestBlockHash()
+    let bestBlock = await this.getBlock(best)
+    blocks.push(bestBlock)
+    for (let i = 0; i < process.env.LIST_LENGTH; i++) {
+      let previousHash = blocks[ blocks.length - 1 ].previousblockhash
+      let previousBlock = await this.getBlock(previousHash)
+      blocks.push(previousBlock)
+    }
+    return blocks
+  }
+
+  async getBlock (hash) {
+    try {
+      let r = await fetch(this.url + '/block/' + hash)
+      let data = await r.json()
+      return data
+    } catch (err) {
+      logger.error(err)
+      throw err
+    }
+  }
+
+  async getBestBlockHash () {
+    try {
+      let r = await fetch(this.url + '/status?q=getBestBlockHash')
+      let data = await r.json()
+      return data.bestblockhash
+    } catch (err) {
+      logger.error(err)
+      throw err
+    }
   }
 
   async getTxs () {
     return 'bitcore txs'
-  }
-
-  async getHeight () {
-    debugger
-    try {
-      let r = await fetch(this.url + '/status?q=getinfo')
-      let data = await r.json()
-      return data.info.blocks
-    } catch (err) {
-      logger.error(err)
-      throw err
-    }
-  }
-
-  async getLatest () {
-    try {
-      var height = await this.getHeight()
-
-      let latest = []
-      for (var i = 0; i < 4; i++) {
-        let next = height - i
-        let blockIndex = await fetch(this.url + '/block-index/' + next)
-        let json = await blockIndex.json()
-        latest.push({height: next, hash: json.blockHash})
-      }
-
-      return latest
-    } catch (err) {
-      logger.error(err)
-      throw err
-    }
   }
 }
 module.exports = BitcoreClient

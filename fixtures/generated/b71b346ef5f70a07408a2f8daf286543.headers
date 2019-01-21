@@ -1,0 +1,45 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "date": "Fri, 18 Jan 2019 01:55:29 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "close",
+    "set-cookie": [
+      "__cfduid=d4552963576ceaba1112270208c518af11547776529; expires=Sat, 18-Jan-20 01:55:29 GMT; path=/; domain=.blockexplorer.com; HttpOnly; Secure",
+      "BE=518c439e70eff248; path=/"
+    ],
+    "x-powered-by": "Express",
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "GET, HEAD, PUT, POST, OPTIONS",
+    "access-control-allow-headers": "Origin, X-Requested-With, Content-Type, Accept, Content-Length, Cache-Control, cf-connecting-ip",
+    "cache-control": "public, max-age=30",
+    "x-content-type-options": "nosniff",
+    "etag": "W/\"102-G3K35OphN4zYNdS8V0Y5EsHe50A\"",
+    "vary": "Accept-Encoding",
+    "cf-cache-status": "BYPASS",
+    "expect-ct": "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+    "server": "cloudflare",
+    "cf-ray": "49ad708b3f9d92b8-SJC",
+    "content-encoding": "gzip"
+  },
+  "url": "https://blockexplorer.com/api/status?q=getinfo",
+  "time": 574,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "Accept": [
+        "*/*"
+      ],
+      "User-Agent": [
+        "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)"
+      ],
+      "Accept-Encoding": [
+        "gzip,deflate"
+      ],
+      "Connection": [
+        "close"
+      ]
+    }
+  }
+}

@@ -85,6 +85,7 @@ class CoinClient {
       try {
         logger.info('EXPLORER: ' + this.coin + 'GETTING BLOCKS: ')
         let data = await this.client.getBlocks()
+        console.log(data)
         return res.json(data)
       } catch (err) {
         res.status(500)

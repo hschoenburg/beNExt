@@ -1,12 +1,8 @@
 import React from 'react'
 import Head from '../../components/head'
-// import Link from 'next/link'
-// import Search from '../../components/search'
-// import ErrorMsg from '../../components/utils/error_msg'
-// import Block from '../../components/block'
-// import Address from '../../components/address'
 import fetch from 'isomorphic-unfetch'
 import Select from 'react-select'
+import List from '../../components/explorer/list'
 
 const coinOptions = process.env.SUPPORTED_COINS.split(',').map(c => { return {value: c, label: c.toUpperCase()} })
 
@@ -22,7 +18,7 @@ class Explorer extends React.Component {
       // fill history with objects of type
       // {type: 'block/tx/addr', val: ""}
     }
-    //this.handleCoinSwitch = this.handleCoinSwitch.bind(this)
+    this.handleCoinSwitch = this.handleCoinSwitch.bind(this)
   }
 
   static async getInitialProps ({ req }) {
@@ -35,10 +31,10 @@ class Explorer extends React.Component {
     return data
   }
 
-  static async handleCoinSwitch (selected) {
+  async handleCoinSwitch (selected) {
     let coin = selected.value
-    let txs = await this.getTxs(coin)
-    let blocks = await this.getBlocks(coin)
+    let txs = await Explorer.getTxs(coin)
+    let blocks = await Explorer.getBlocks(coin)
     console.log('switchinhg: ' + coin)
     let newState = { coin: coin, txs: txs, blocks: blocks }
     return this.setState(newState)
@@ -69,13 +65,13 @@ class Explorer extends React.Component {
 
         <div className='hero'>
           <h1 className='title'>Coin {this.state.coin}</h1>
-          <p>Txs: {JSON.stringify(this.state.txs)}</p>
-          <p>Blocks: {JSON.stringify(this.state.blocks)}</p>
+          <List title='Latest Transactions' elements={this.state.txs} />
+          <List title='Latest Blocks' elements={this.state.blocks} />
           <p>Explorer Select</p>
           <Select
             name={'coin-select'}
             value={selected}
-            onChange={handleCoinSwitch}
+            onChange={this.handleCoinSwitch}
             options={coinOptions}
             instanceId={`id-${this.state.coin}`}
           />

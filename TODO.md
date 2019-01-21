@@ -1,3 +1,8 @@
+# Research TODO
+https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/introduction.html
+NEXTJS_QUICK_START_GUIDE.pdf
+
+
 # Explorer TODO
 
 Implement bcoin AND bitcore methods
